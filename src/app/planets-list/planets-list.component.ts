@@ -18,6 +18,7 @@ export class PlanetsListComponent implements OnInit {
   pageSize: number;
   length: number;
   currentlyLoadPage: number;
+  searchQuery: string;
 
 
   constructor(
@@ -59,26 +60,23 @@ export class PlanetsListComponent implements OnInit {
     this.isFetching = true;
     this.planetsService.fetchPlanets(this.currentlyLoadPage, searchQuery)
         .subscribe(data => {
-          this.isFetching = false;
           this.planetsLoaded = this.planetsService.getPlanets();
           this.currentlyLoadPage = this.planetsService.getNextPage();
           this.length = this.planetsService.getPageLength();
+          this.isFetching = false;
         });
   }
 
   handlePageSizeChange(size: number) {
-    if ( this.pageSize < size ) {
-      this.pageSize = size;
-      this.toLoadPageIndex = this.generateLoadPage();
-      // this.currentlyLoadPage = this.planetsService.getNextPage();
-      for (this.currentlyLoadPage; this.currentlyLoadPage <= this.toLoadPageIndex; this.currentlyLoadPage++ ) {
-            this.getPlanetsData();
+    this.pageSize = size;
+    this.toLoadPageIndex = this.generateLoadPage();
+    console.log(this.currentlyLoadPage, this.toLoadPageIndex)
+    if (this.currentlyLoadPage) {
+      for (this.currentlyLoadPage; this.currentlyLoadPage <= this.toLoadPageIndex; this.currentlyLoadPage++) {
+        this.getPlanetsData(this.searchQuery);
       }
-    } else {
-      // size <= this.length ? this.pageSize = size : this.pageSize = this.length;
-      this.pageSize = size;
-      this.toLoadPageIndex = this.generateLoadPage();
     }
+      // size <= this.length ? this.pageSize = size : this.pageSize = this.length;
     this.router.navigate([], {queryParams: {page_size: size <= this.length ? size : this.length}, queryParamsHandling: 'merge'})
   }
 
@@ -88,13 +86,14 @@ export class PlanetsListComponent implements OnInit {
       }, queryParamsHandling: 'merge'});
     this.pageIndex = pageIndex;
     this.toLoadPageIndex = this.generateLoadPage();
-    // this.currentlyLoadPage = this.planetsService.getPlanets().length / 10 + 1 ;
+    console.log(this.pageIndex, this.toLoadPageIndex, this.pageSize, this.planetsService.getPlanets().length)
     if ( Math.max(this.pageIndex, this.toLoadPageIndex) * this.pageSize < this.planetsService.getPlanets().length ) {
       this.planetsLoaded = this.planetsService.getPlanets();
     } else {
-      for (this.currentlyLoadPage; this.currentlyLoadPage <= this.toLoadPageIndex; this.currentlyLoadPage++) {
-        this.getPlanetsData();
-      }
+      // for (this.currentlyLoadPage; this.currentlyLoadPage <= this.toLoadPageIndex; this.currentlyLoadPage++) {
+      //   this.getPlanetsData(this.searchQuery);
+      // }
+      this.getPlanetsData(this.searchQuery)
     }
   }
 
@@ -105,12 +104,14 @@ export class PlanetsListComponent implements OnInit {
   }
 
   generateLoadPage() {
-    return Math.ceil((this.pageIndex + 1)  * this.pageSize / 10 ) <= 6 ? Math.ceil((this.pageIndex + 1)  * this.pageSize / 10 ) : 6;
+    return Math.ceil((this.pageIndex + 1) * this.pageSize / 10) <= Math.ceil(this.length / 10) ?
+           Math.ceil((this.pageIndex + 1) * this.pageSize / 10) : Math.ceil(this.length / 10);
   }
 
   searchPlanets(searchQuery: string) {
     this.planetsService.resetPlanets();
     this.pageIndex = 0;
+    this.searchQuery = searchQuery;
     this.currentlyLoadPage = this.planetsService.getNextPage();
     console.log(this.length)
     this.getPlanetsData(searchQuery);
