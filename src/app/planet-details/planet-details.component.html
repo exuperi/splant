@@ -1,0 +1,18 @@
+<div *ngIf="isFetching" class="loader">
+    Loading details...
+</div>
+
+<button class="material-icons" routerLink="/planets-list" queryParamsHandling="preserve">keyboard_backspace</button>
+<div *ngIf="!isFetching" class="planet-details">
+    <h2>{{planet.name}}</h2>
+    <ul>
+        <li><span>Rotation period:</span> {{planet.rotation_period}}</li>
+        <li><span>Orbital period:</span> {{planet.orbital_period}}</li>
+        <li><span>Diameter:</span> {{planet.diameter}}</li>
+        <li><span>Climate:</span> {{planet.climate}}</li>
+        <li><span>Gravity:</span> {{planet.gravity}}</li>
+        <li><span>Terrain:</span> {{planet.terrain}}</li>
+        <li><span>Surface water:</span> {{planet.surface_water}}</li>
+        <li><span>Population:</span> {{planet.population}}</li>
+    </ul>
+</div>

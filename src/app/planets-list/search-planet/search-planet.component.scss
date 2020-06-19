@@ -1,0 +1,16 @@
+.search-planet {
+  display: flex;
+
+  &__input {
+    flex-grow: 1;
+    padding: 10px;
+  }
+
+  &__btn {
+    padding: 0 20px;
+    background: navy;
+    color: #fff;
+    box-shadow: none;
+    border: none;
+  }
+}

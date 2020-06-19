@@ -1,0 +1,20 @@
+.planet-details {
+  width: 100%;
+  text-align: center;
+
+  h2 {
+    font-size: 28px;
+  }
+
+  ul {
+    list-style-type: none;
+
+    li {
+      color: #007fff;
+      span {
+        color: red;
+        font-size: 16px;
+      }
+    }
+  }
+}
