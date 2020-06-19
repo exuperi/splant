@@ -1,4 +1,8 @@
+@import '../../styles/variables';
+
 .planets-list {
+  font-family: $font-museo;
+  font-weight: 500;
 
   &__inner {
     list-style-type: none;
@@ -6,22 +10,74 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
   }
 
   &__item {
-    border: 1px solid black;
-    padding: 10px 20px;
+    border: 1px solid rgb(231, 220, 255);
+    padding: 19px;
     width: 100px;
     height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 0px 6px 4px #ffffff47;
+    border-radius: 50%;
+    background-color: $color-planet-background;
+    color: $color-navy;
+    margin: 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
     h3 {
       text-align: center;
-      
-      &:hover {
-        cursor: pointer;
-      }
     }
+  }
+
+  &__loader {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 80px;
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+
+    animation: loader 1s linear infinite;
+  }
+
+  hr:first-of-type {
+    margin-top: 80px;
+  }
+}
+
+::ng-deep {
+
+  .mat-paginator-outer-container,
+  .mat-select-arrow,
+  .mat-select-value {
+    background-color: $color-background;
+    color: $color-planet-background;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: $color-navy;
+  }
+}
+
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }

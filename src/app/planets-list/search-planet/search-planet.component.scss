@@ -4,6 +4,10 @@
   &__input {
     flex-grow: 1;
     padding: 10px;
+
+    &::placeholder {
+      font-family: 'Roboto', sans-serif;
+    }
   }
 
   &__btn {

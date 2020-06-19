@@ -1,20 +1,67 @@
+@import '../../styles/variables';
+
 .planet-details {
-  width: 100%;
-  text-align: center;
+  &__inner {
+    font-family: $font-museo;
 
-  h2 {
-    font-size: 28px;
-  }
+    h2 {
+      font-size: 5em;
+      color: $color-planet-background;
+      width: 100%;
+      text-align: center;
+      margin-top: 25px;
+    }
 
-  ul {
-    list-style-type: none;
+    ul {
+      font-size: 1.4em;
+      margin-left: 1em;
 
-    li {
-      color: #007fff;
-      span {
-        color: red;
-        font-size: 16px;
+      li {
+        color: $color-purple-light;
+        padding-left: 0px;
+
+        span {
+          color: $color-purple-dark;
+        }
       }
     }
+  }
+
+  &__end-line {
+    margin-top: 50px;
+  }
+
+  &__return-btn {
+    position: absolute;
+    font-size: 17px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__loader {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+
+    animation: loader 1s linear infinite;
+  }
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }

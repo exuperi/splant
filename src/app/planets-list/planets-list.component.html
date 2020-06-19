@@ -1,7 +1,8 @@
-
-
 <div class="planets-list">
-    <app-search-planet (onSearchPlanet)="searchPlanets($event)"></app-search-planet>
+    <app-search-planet 
+				(onSearchPlanet)="searchPlanets($event)"
+				[inputValue]="searchQuery"
+        ></app-search-planet>
     <mat-paginator  #paginator
                     [length]="length"
                     [pageIndex]="pageIndex"
@@ -10,15 +11,18 @@
                     (page)="pageEvent = handlePaginatorEvent($event)">
     </mat-paginator>
     <div *ngIf="isFetching" class="planets-list__loader">
-        Loading...
+        <img src="../../assets/noun_Death Star_1519498.svg" alt="Death Star">
     </div>
     <div *ngIf="!isFetching" class="planets-list__table">
         <ul class="planets-list__inner">
-            <li *ngFor="let planet of planetsLoaded.slice(pageIndex*pageSize, (pageIndex+1)*pageSize)" class="planets-list__item">
-                <h3 [routerLink]="[planet.id]" queryParamsHandling="preserve">{{planet.name}}</h3>
+            <li [routerLink]="[planet.id]"
+              *ngFor="let planet of planetsLoaded.slice(pageIndex*pageSize, (pageIndex+1)*pageSize)"
+              class="planets-list__item">
+                <h3 queryParamsHandling="preserve">{{planet.name}}</h3>
             </li>
-        </ul>
-
-
-    </div>
+					</ul>
+		</div>
+		<hr>
+		<hr>
+		<hr>
 </div>
