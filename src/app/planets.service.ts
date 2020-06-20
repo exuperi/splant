@@ -13,8 +13,7 @@ interface IFetchPlanetsResponse {
 @Injectable()
 export class PlanetsService {
   private httpConfig = {
-    baseUrl:
-      "http://ip172-18-0-3-brmf4dboudsg00esjfsg-8080.direct.labs.play-with-docker.com/api/planets",
+    baseUrl: "http://0.0.0.0:8080/api/planets",
   };
 
   private planetsList: IPlanet[] = [];
@@ -85,12 +84,12 @@ export class PlanetsService {
           return planet;
         })
       );
-	}
+  }
 
-	reset() {
-		this.planetsList.length = 0;
-		this.nextPage = 1;
-	}
+  reset() {
+    this.planetsList.length = 0;
+    this.nextPage = 1;
+  }
 
   getPlanet(id: number) {
     return this.planetsList.find((planet) => {
@@ -104,9 +103,9 @@ export class PlanetsService {
 
   getPageLength() {
     return this.pageLength;
-	}
+  }
 
-	getPlanets() {
-		return this.planetsList.slice();
-	}
+  getPlanets() {
+    return this.planetsList.slice();
+  }
 }

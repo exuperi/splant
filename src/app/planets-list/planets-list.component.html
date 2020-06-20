@@ -4,10 +4,10 @@
 				[inputValue]="searchQuery"
         ></app-search-planet>
     <mat-paginator  #paginator
-                    [length]="length"
+                    [length]="pageLength"
                     [pageIndex]="pageIndex"
                     [pageSize]="pageSize"
-                    [pageSizeOptions]="[5, 10, 25, 100]"
+										[pageSizeOptions]="[5, 10, 25, 100]"
                     (page)="pageEvent = handlePaginatorEvent($event)">
     </mat-paginator>
     <div *ngIf="isFetching" class="planets-list__loader">
@@ -15,10 +15,12 @@
     </div>
     <div *ngIf="!isFetching" class="planets-list__table">
         <ul class="planets-list__inner">
-            <li [routerLink]="[planet.id]"
+						<li 
+							[routerLink]="[planet.id]"
+						 	queryParamsHandling="preserve"
               *ngFor="let planet of planetsLoaded.slice(pageIndex*pageSize, (pageIndex+1)*pageSize)"
               class="planets-list__item">
-                <h3 queryParamsHandling="preserve">{{planet.name}}</h3>
+                <h3>{{planet.name}}</h3>
             </li>
 					</ul>
 		</div>

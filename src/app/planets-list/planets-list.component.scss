@@ -7,10 +7,17 @@
   &__inner {
     list-style-type: none;
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+
+    @media screen and (max-width: 998px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media screen and (max-width: 576px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   &__item {
@@ -25,7 +32,6 @@
     border-radius: 50%;
     background-color: $color-planet-background;
     color: $color-navy;
-    margin: 15px;
 
     &:hover {
       cursor: pointer;
